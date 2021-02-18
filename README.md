@@ -16,6 +16,10 @@ Run the following command to build the library and run unit tests:
 ./gradlew build
 ```
 
+To launch unit tests only run the following command:
+```
+./gradlew cleanTest test
+```
 
 ## Important Implementation Details 
 
@@ -24,6 +28,9 @@ Here is a list of important considerations:
 
 
 * **Clean code principles are used** for delivering both code and unit tests (https://www.amazon.com.au/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+
+
+* **A True Test Driven Development was used** for developing code. Unit tests were added first. Please note that while fixing unit tests failures new abstractions were added such as BuySellTransaction. Those ones were not tested to save time and get to the point. But normally they would be tested after the current failing tests were fixed.
 
 
 * **BigDecimal type is used to handle monetary values with precision** and to avoid costly financial rounding problems. A proper class could be implemented but for the sake of simplicity BigDecimal will do for now
@@ -36,3 +43,4 @@ Here is a list of important considerations:
 
 
 * **At least 2 entries are expected in the input** if less than two a runtime exception will be thrown
+

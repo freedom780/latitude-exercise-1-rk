@@ -1,5 +1,6 @@
 package au.com.latitudefinancial.exercise;
 
+import au.com.latitudefinancial.exercise.model.StockPrice;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -78,7 +79,7 @@ class TradingProfitAnalyzerInvalidDataTest {
         TradingProfitAnalyzer tradingProfitAnalyzer = new TradingProfitAnalyzer();
         List<StockPrice> priceListWithOneEntry = new ArrayList<>();
         priceListWithOneEntry.add(new StockPrice(ONE_HOUR_IN_MINUTES, STOCK_PRICE_70));
-        int exceededByOneMinuteOffset = tradingProfitAnalyzer.calculateNumberOfTradingHours() * 60 + 1;
+        int exceededByOneMinuteOffset = tradingProfitAnalyzer.calculateNumberOfTradingMinutes() * 60 + 1;
         priceListWithOneEntry.add(new StockPrice(exceededByOneMinuteOffset, STOCK_PRICE_100));
 
         // exercise SUT + verify

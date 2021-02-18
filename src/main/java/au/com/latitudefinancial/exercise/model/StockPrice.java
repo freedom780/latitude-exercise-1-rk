@@ -1,4 +1,4 @@
-package au.com.latitudefinancial.exercise;
+package au.com.latitudefinancial.exercise.model;
 
 import java.math.BigDecimal;
 
@@ -18,5 +18,13 @@ public class StockPrice {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return "StockPrice{" +
+                "minutesSinceOpening=" + minutesSinceOpening +
+                ", price=" + price +
+                '}';
     }
 }
