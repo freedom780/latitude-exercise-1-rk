@@ -13,6 +13,7 @@ class TradingProfitAnalyzerInvalidDataTest {
 
     private static final BigDecimal STOCK_PRICE_70 = new BigDecimal("70.00");
     private static final BigDecimal STOCK_PRICE_100 = new BigDecimal("100.00");
+
     private static final int ONE_HOUR_IN_MINUTES = 60;
 
     @Test
@@ -63,6 +64,22 @@ class TradingProfitAnalyzerInvalidDataTest {
         priceListWithOneEntry.add(new StockPrice(-1, STOCK_PRICE_70));
         priceListWithOneEntry.add(new StockPrice(ONE_HOUR_IN_MINUTES, STOCK_PRICE_100));
         TradingProfitAnalyzer tradingProfitAnalyzer = new TradingProfitAnalyzer();
+
+        // exercise SUT + verify
+        assertThrows(IllegalStateException.class, () -> {
+            tradingProfitAnalyzer.determineMostProfitableTransaction(priceListWithOneEntry);
+        });
+    }
+
+    @Test
+    public void throwsExceptionWhenMinuteOffsetExceeds4pmBoundary() {
+
+        // setup fixture
+        TradingProfitAnalyzer tradingProfitAnalyzer = new TradingProfitAnalyzer();
+        List<StockPrice> priceListWithOneEntry = new ArrayList<>();
+        priceListWithOneEntry.add(new StockPrice(ONE_HOUR_IN_MINUTES, STOCK_PRICE_70));
+        int exceededByOneMinuteOffset = tradingProfitAnalyzer.calculateNumberOfTradingHours() * 60 + 1;
+        priceListWithOneEntry.add(new StockPrice(exceededByOneMinuteOffset, STOCK_PRICE_100));
 
         // exercise SUT + verify
         assertThrows(IllegalStateException.class, () -> {
